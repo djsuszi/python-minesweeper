@@ -22,16 +22,16 @@ def get_settings(event, name=None):
 
         Ustawienia gry:
             # liczniki gry
-            'var_games_played': var_games_played,  # licznik sesji
-            'var_hidden_mines': var_hidden_mines,  # aktualna liczba nierozbrojonych min
-            'var_total_mines': var_total_mines,  # całkowita liczba min na polu
+            'rozegrane_gry'  # licznik sesji
+            'liczba_ukrytych_min'  # aktualna liczba nierozbrojonych min
+            'liczba_wszystkich_min'  # całkowita liczba min na polu
 
             # ustawienia min
-            fields_grid': fields_grid,  # pola (wraz z indeksami)
-            all_fields': list(fields_grid.values()),  # wszystkie pola
-            fields_with_mines': [],  # pola zazbrojone miną
-            fields_marked': [],  # pole oznaczone przez gracza
-            fields_counters': {}  # informacje o licznikach w polach
+            siatka': fields_grid,  # pola (wraz z indeksami)
+            wszystkie_pola': list(fields_grid.values()),  # wszystkie pola
+            pola_z_minami': [],  # pola zazbrojone miną
+            pola_oznaczone': [],  # pole oznaczone przez gracza
+            liczniki_pol': {}  # informacje o licznikach w polach
     """
     settings = event.widget.master.game_settings
     if name:
@@ -39,7 +39,7 @@ def get_settings(event, name=None):
     return settings
 
 
-def start_new_game(event):
+def nowa_gra(event):
     """
         Przygotowuje pole minowe.
         Rozmieszcza w wylosowanych miejscach miny.
@@ -49,9 +49,10 @@ def start_new_game(event):
     pass
 
 
-def setup_mines(all_fields, select_count):
+def losuj_miny(all_fields, select_count):
     """
-        Wybiera ze zbioru zadaną liczbę pól.
+        Wybiera ze zbioru zadaną liczbę pól,
+        które mają zawierać miny.
     """
     pass
 
@@ -63,14 +64,14 @@ def notify_neightbours(settings):
     pass
 
 
-def mark_field_with_mine(event):
+def oznacz_pole(event):
     """
         Oznacza dane pole jako zawierające minę.
     """
     pass
 
 
-def defuse_mine(event):
+def odkryj_pole(event):
     """
         Podejmuje próbę rozbrojenia pola.
         Jeśli w polu jest mina, gra kończy się.

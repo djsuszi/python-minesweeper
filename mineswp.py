@@ -9,9 +9,9 @@ from game_lib import (
     LMOUSE_CLICK_EVENT,
     RMOUSE_CLICK_EVENT,
     DEFAULT_MINE_COUNT,
-    defuse_mine,
-    mark_field_with_mine,
-    start_new_game
+    odkryj_pole,
+    oznacz_pole,
+    nowa_gra
 )
 
 
@@ -45,8 +45,8 @@ def create_minesweeper_window():
                 state=tk.DISABLED,
             )
             field_button.grid(column=row_num, row=col_num, sticky=W)
-            field_button.bind(LMOUSE_CLICK_EVENT, defuse_mine)
-            field_button.bind(RMOUSE_CLICK_EVENT, mark_field_with_mine)
+            field_button.bind(LMOUSE_CLICK_EVENT, odkryj_pole)
+            field_button.bind(RMOUSE_CLICK_EVENT, oznacz_pole)
             # zapamiętanie przycisku na liście pod indeksem
             fields_grid[(row_num, col_num)] = field_button
 
@@ -69,21 +69,21 @@ def create_minesweeper_window():
     # definicja przycisku nowej gry
     new_game_button = ttk.Button(mainframe, text="Nowa gra")
     new_game_button.grid(column=7, row=13, columnspan=5, sticky=W)
-    new_game_button.bind(LMOUSE_CLICK_EVENT, start_new_game)
+    new_game_button.bind(LMOUSE_CLICK_EVENT, nowa_gra)
 
     # zapamiętanie pod jednym obiektem "konfiguracji" okna
     # przycisków oraz liczników gry
     mainframe.game_settings = {
         # liczniki gry
-        'var_games_played': var_games_played,  # licznik sesji
-        'var_hidden_mines': var_hidden_mines,  # aktualna liczba nierozbrojonych min
-        'var_total_mines': var_total_mines,  # całkowita liczba min na polu
+        'rozegrane_gry': var_games_played,  # licznik sesji
+        'liczba_ukrytych_min': var_hidden_mines,  # aktualna liczba nierozbrojonych min
+        'liczba_wszystkich_min': var_total_mines,  # całkowita liczba min na polu
         # ustawienia min
-        'fields_grid': fields_grid,  # pola (wraz z indeksami)
-        'all_fields': list(fields_grid.values()),  # wszystkie pola
-        'fields_with_mines': [],  # pola zazbrojone miną
-        'fields_marked': [],  # pole oznaczone przez gracza
-        'fields_counters': {}  # informacje o licznikach w polach
+        'siatka': fields_grid,  # pola (wraz z indeksami)
+        'wszystkie_pola': list(fields_grid.values()),  # wszystkie pola
+        'pola_z_minami': [],  # pola zazbrojone miną
+        'pola_oznaczone': [],  # pole oznaczone przez gracza
+        'liczniki_pol': {}  # informacje o licznikach w polach
     }
 
     # zwrócenie gotowego obiektu, który należy aktywować przez wywołanie:
